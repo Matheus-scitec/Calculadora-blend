@@ -1,39 +1,48 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Calculadora Blend</title>
-    <style>
-        body { font-family: Arial; padding: 20px; max-width: 600px; margin: 0 auto; }
-        input, button { padding: 10px; margin: 5px; font-size: 16px; }
-        .resultado { background: #f0f0f0; padding: 15px; margin: 10px 0; border-radius: 5px; }
-    </style>
-</head>
-<body>
-    <h1>🥩 Calculadora de Blend</h1>
-    <p>Quantos hambúrgueres? <input type="number" id="qtd" placeholder="Ex: 50">
-    <button onclick="calcular()">Calcular</button></p>
-    
-    <div id="resultado"></div>
-    
-    <script>
-        function calcular() {
-            const qtd = document.getElementById('qtd').value;
-            if (!qtd) return;
-            
-            const pesoBruto = (qtd * 200) / 0.95;
-            const acem = pesoBruto * 0.6;
-            const peito = pesoBruto * 0.4;
-            
-            document.getElementById('resultado').innerHTML = `
-                <div class="resultado">
-                    <h3>Resultados para ${qtd} hambúrgueres:</h3>
-                    <p><strong>Total:</strong> ${(pesoBruto/1000).toFixed(2)} kg</p>
-                    <p><strong>Acém (60%):</strong> ${(acem/1000).toFixed(2)} kg</p>
-                    <p><strong>Peito (40%):</strong> ${(peito/1000).toFixed(2)} kg</p>
+<div class="container">
+        <div class="header">
+            <h1>🥩 Calculadora de Blend</h1>
+            <p>Acém 60% + Peito 40% | Hambúrguer 200g | Perda 5%</p>
+        </div>
+
+        <div class="content">
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="quantidade">Quantos hambúrgueres?</label>
+                    <input type="number" id="quantidade" min="1" placeholder="Ex: 50">
+                    <button class="calculate-btn" onclick="calcular()">Calcular</button>
                 </div>
-            `;
-        }
-    </script>
-</body>
-</html>
+            </div>
+
+            <div class="results" id="results">
+                <div class="result-card">
+                    <h3>📊 Total de Carne Necessária</h3>
+                    <div class="result-value" id="totalCarne">-</div>
+                    <p>Peso bruto (incluindo 5% de perda)</p>
+                </div>
+
+                <div class="breakdown">
+                    <div class="breakdown-card">
+                        <h4>🥩 Acém</h4>
+                        <div class="breakdown-value" id="acem">-</div>
+                        <div class="breakdown-percentage">60% do total</div>
+                    </div>
+
+                    <div class="breakdown-card">
+                        <h4>🥩 Peito</h4>
+                        <div class="breakdown-value" id="peito">-</div>
+                        <div class="breakdown-percentage">40% do total</div>
+                    </div>
+                </div>
+
+                <div class="specs">
+                    <h4>📋 Especificações do Blend</h4>
+                    <ul>
+                        <li>Peso por hambúrguer: 200g</li>
+                        <li>Composição: 60% Acém + 40% Peito</li>
+                        <li>Perda considerada: 5%</li>
+                        <li>Peso líquido final: <span id="pesoLiquido">-</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
